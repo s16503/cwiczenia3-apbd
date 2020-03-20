@@ -9,6 +9,6 @@ namespace cwiczenia3_apbd.DAL
     public interface IDbService
     {
         public IEnumerable<Student> GetStudents();
-        public int DeleteStud(int id);
+       // public int DeleteStud(int id);
     }
 }

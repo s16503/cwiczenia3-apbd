@@ -27,7 +27,7 @@ namespace cwiczenia3_apbd.DAL
             return _students;
         }
 
-        public int DeleteStud(int id)
+        /*public int DeleteStud(int id)
         { 
                foreach(Student st in _students)
             {
@@ -39,6 +39,6 @@ namespace cwiczenia3_apbd.DAL
             }
 
             return -1;  // 0 udało się , -1 nie 
-        }
+        }*/
     }
 }
