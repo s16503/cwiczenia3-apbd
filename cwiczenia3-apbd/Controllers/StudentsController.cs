@@ -48,6 +48,9 @@ namespace cwiczenia3_apbd.Controllers
         public IActionResult CreateStudent(Student student) //nowy student
         {
             student.Index = $"s{new Random().Next(1, 20000)}";
+
+            ((List<Student>)_dbService.GetStudents()).Add(student);
+
             return Ok(student);
         }
 
