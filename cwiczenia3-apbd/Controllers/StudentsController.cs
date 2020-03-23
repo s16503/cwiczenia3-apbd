@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using cwiczenia3_apbd.DAL;
 using cwiczenia3_apbd.models;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,31 @@ namespace cwiczenia3_apbd.Controllers
         public IActionResult GetStudents(string orderBy) //action methos
         {
 
-            return Ok(_dbService.GetStudents());
+            List<Student> resList = new List<Student>();
+
+            using (var con = new SqlConnection("Data Source=db-mssql;Initial Catalog=s16503;Integrated Security=True;"))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = con;
+                com.CommandText = "SELECT * FROM Student";
+
+                con.Open();
+                SqlDataReader dr = com.ExecuteReader();
+
+                while(dr.Read())
+                {
+                    var st = new Student();
+                    st.FirstName = dr["FirstName"].ToString();
+                    st.LastName = dr["LastName"].ToString();
+                    st.Index = dr["IndexNumber"].ToString();
+                    st.IdStudent = (int)dr["IdEnrollment"];
+
+                    resList.Add(st);
+                }
+
+            }
+
+                return Ok(resList);
         }
 
 
