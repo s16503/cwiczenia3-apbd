@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using cwiczenia3_apbd.DAL;
 using cwiczenia3_apbd.models;
+using cwiczenia3_apbd.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cwiczenia3_apbd.Controllers
@@ -12,6 +13,7 @@ namespace cwiczenia3_apbd.Controllers
     [Route("api/students")]
     public class StudentsController : ControllerBase
     {
+        private const string ConString = "Data Source=db-mssql;Initial Catalog=s16503;Integrated Security=True;";
         private readonly IDbService _dbService;
 
 
@@ -26,7 +28,7 @@ namespace cwiczenia3_apbd.Controllers
 
             List<Student> resList = new List<Student>();
 
-            using (var con = new SqlConnection("Data Source=db-mssql;Initial Catalog=s16503;Integrated Security=True;"))
+            using (var con = new SqlConnection(ConString))
             using (var com = new SqlCommand())
             {
                 com.Connection = con;
@@ -52,19 +54,63 @@ namespace cwiczenia3_apbd.Controllers
         }
 
 
+        // ze struktury tabel w bazie wynika ze student może mieć tylko jeden (aktualny) wpis na studia
+        // studenci w bazie mają index bez "s-ki"
+        [HttpGet("{index}")]
+        public IActionResult GetStudentEnrollments(string index)
+        {
+
+            //List<Enrollment> listaWpisow = new List<Enrollment>();
+
+            Enrollment enrollment = null;
+
+            using (var con = new SqlConnection(ConString))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = con;
+                com.CommandText = "SELECT Enrollment.IdEnrollment, Semester, Studies.Name, StartDate" +
+                    " FROM Enrollment " +
+                    "JOIN Student ON Student.IdEnrollment = Enrollment.IdEnrollment " +
+                    "JOIN Studies ON Enrollment.IdStudy=Studies.IdStudy " +
+                    "WHERE Student.IndexNumber = @index;";
+
+                com.Parameters.AddWithValue("index",index);
+                con.Open();
+                SqlDataReader dr = com.ExecuteReader();
+
+                while (dr.Read())
+                {
+                        enrollment = new Enrollment();                
+                        enrollment.IdEnrollment = (int)dr["IdEnrollment"];
+                        enrollment.Semester = (int)dr["Semester"];
+                        enrollment.Study = dr["Name"].ToString();
+                        enrollment.StartDate = dr["StartDate"].ToString();
+
+                   // listaWpisow.Add(enrollment);
+                }
+
+            }
+
+            if(enrollment != null )
+            return Ok(enrollment);
+
+
+
+            return NotFound("Not found");
+        }
 
 
         ////1 spososób przekazywania danych
-        //[HttpGet("{id}")]
-        //public IActionResult GetStudent(int id) //zwraca rezultat z metody action. ...
+        //[HTTPGET("{indexNumber}")]
+        //public IActionResult getstudent(int id) //zwraca rezultat z metody action. ...
         //{
 
         //    if (id == 1)
-        //        return Ok("Jan");
-        //    else if(id ==2)
-        //        return Ok("Andrzej");
+        //        return ok("jan");
+        //    else if (id == 2)
+        //        return ok("andrzej");
 
-        //    return NotFound("not found");
+        //    return notfound("not found");
         //}
 
 
