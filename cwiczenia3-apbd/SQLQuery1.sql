@@ -1,5 +1,5 @@
 ﻿
-
+use s16503
 /*
 -- Created by Vertabelo (http://vertabelo.com)
 -- Last modification date: 2020-03-22 07:12:20.376
@@ -68,13 +68,20 @@ SELECT * FROM student;
 SELECT Enrollment.IdEnrollment, Semester, Studies.Name, StartDate FROM Enrollment JOIN Student ON Student.IdEnrollment = Enrollment.IdEnrollment JOIN Studies ON Enrollment.IdStudy=Studies.IdStudy WHERE Student.IndexNumber = 14233;
 
 
-
+DELETE FROM Enrollment WHERE Enrollment.IdStudy = 1;
+DELETE Studies WHERE Studies.name = 'Informatyka';
 
     INSERT INTO Studies VALUES(3,'Architektura wnętrz');
     INSERT INTO Enrollment values(433,3,3,'2018-10-01');
 
 
+    INSERT INTO Studies VALUES(1,'IT');
+    INSERT INTO Enrollment values(1,1,1,'2019-10-01');
+
+
     INSERT INTO Student(IndexNumber,FirstName, lastname, birthdate, IdEnrollment)
         VALUES (12320,'Aleksander','Byk','1996-02-03', 433);
 
-      
+
+
+      SELECT Count(*) as isnt FROM Enrollment JOIN Studies ON Enrollment.IdStudy = Studies.IdStudy WHERE Studies.Name = 'IT';

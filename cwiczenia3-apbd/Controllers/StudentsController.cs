@@ -42,7 +42,7 @@ namespace cwiczenia3_apbd.Controllers
                     var st = new Student();
                     st.FirstName = dr["FirstName"].ToString();
                     st.LastName = dr["LastName"].ToString();
-                    st.Index = dr["IndexNumber"].ToString();
+                    st.IndexNumber = dr["IndexNumber"].ToString();
                     st.IdStudent = (int)dr["IdEnrollment"];
 
                     resList.Add(st);
@@ -118,7 +118,7 @@ namespace cwiczenia3_apbd.Controllers
         [HttpPost]
         public IActionResult CreateStudent(Student student) //nowy student
         {
-            student.Index = $"s{new Random().Next(1, 20000)}";
+            student.IndexNumber = $"s{new Random().Next(1, 20000)}";
 
             ((List<Student>)_dbService.GetStudents()).Add(student);
 
@@ -135,7 +135,7 @@ namespace cwiczenia3_apbd.Controllers
             {
                 if (st.IdStudent == id)
                 {
-                    st.Index = "s6666";
+                    st.IndexNumber = "s6666";
                     return Ok("Aktualizacja dokończona");
                 }
             }

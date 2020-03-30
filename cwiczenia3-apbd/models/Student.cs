@@ -7,9 +7,15 @@ namespace cwiczenia3_apbd.models
 {
     public class Student
     {
-        public int IdStudent { get; set; }
-        public String FirstName { get; set; }
+        
+        public int IdStudent { get; set; }  //na potrzeby poprzednich cwiczen
+
+
+        public string IndexNumber { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Index { get; set; }
+        public string BirthDate { get; set; }
+        public string Studies { get; set; }
+
     }
 }
