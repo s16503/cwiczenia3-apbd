@@ -87,3 +87,13 @@ DELETE Studies WHERE Studies.name = 'Informatyka';
       SELECT Count(*) as isnt FROM Enrollment JOIN Studies ON Enrollment.IdStudy = Studies.IdStudy WHERE Studies.Name = 'IT';
 
       SELECT IdEnrollment FROM Enrollment JOIN Studies ON Enrollment.IdStudy = Studies.IdStudy WHERE Studies.Name = 'IT' AND Enrollment.Semester = 1;
+
+      SELECT * FROM Enrollment;
+
+
+
+      SELECT IdEnrollment FROM Enrollment WHERE IdStudy =1 AND Enrollment.Semester = 1 ORDER BY StartDate;
+
+                    SELECT * FROM student;      
+                    
+                     SELECT * FROM studies;   

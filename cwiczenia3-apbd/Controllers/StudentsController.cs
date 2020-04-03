@@ -43,7 +43,8 @@ namespace cwiczenia3_apbd.Controllers
                     st.FirstName = dr["FirstName"].ToString();
                     st.LastName = dr["LastName"].ToString();
                     st.IndexNumber = dr["IndexNumber"].ToString();
-                    st.IdStudent = (int)dr["IdEnrollment"];
+                    st.IdEnrollment = (int)dr["IdEnrollment"];
+                    st.BirthDate = dr["BirthDate"].ToString();
 
                     resList.Add(st);
                 }
