@@ -76,7 +76,7 @@ DELETE Studies WHERE Studies.name = 'Informatyka';
 
 
     INSERT INTO Studies VALUES(1,'IT');
-    INSERT INTO Enrollment values(1,1,1,'2019-10-01');
+    INSERT INTO Enrollment values(2,2,1,'2020-02-01');
 
 
     INSERT INTO Student(IndexNumber,FirstName, lastname, birthdate, IdEnrollment)
@@ -85,3 +85,5 @@ DELETE Studies WHERE Studies.name = 'Informatyka';
 
 
       SELECT Count(*) as isnt FROM Enrollment JOIN Studies ON Enrollment.IdStudy = Studies.IdStudy WHERE Studies.Name = 'IT';
+
+      SELECT IdEnrollment FROM Enrollment JOIN Studies ON Enrollment.IdStudy = Studies.IdStudy WHERE Studies.Name = 'IT' AND Enrollment.Semester = 1;
