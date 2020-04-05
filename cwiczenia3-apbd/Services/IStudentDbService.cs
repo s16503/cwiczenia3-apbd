@@ -8,7 +8,7 @@ namespace cwiczenia3_apbd.Services
 {
     interface IStudentDbService
     {
-        void EnrollStudent(EnrollStudentRequest request);
-        void PromoteStudents(int semester, string studies);
+        public void EnrollStudent(EnrollStudentRequest request);
+        public void PromoteStudents(int semester, string studies);
     }
 }

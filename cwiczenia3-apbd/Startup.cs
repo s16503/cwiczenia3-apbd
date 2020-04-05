@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using cwiczenia3_apbd.DAL;
+using cwiczenia3_apbd.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,7 @@ namespace cwiczenia3_apbd
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IDbService,MockDbService>();
+            services.AddTransient<IStudentDbService, SqlServerDbService>();
             services.AddControllers();
         }
 

@@ -26,13 +26,7 @@ namespace cwiczenia3_apbd.Controllers
         //    _service = service;
         //}
 
-
-        [HttpGet]
-        public IActionResult test()
-        {
-            return Ok("balaallaahahhaa");
-        }
-
+       
         [HttpPost]
         public IActionResult EnrollStudent(EnrollStudentRequest request) //nowy student
         {
@@ -161,7 +155,7 @@ namespace cwiczenia3_apbd.Controllers
         }
 
         [HttpPost("{promotions}")]
-         public IActionResult Promotions(PromotionStudentRequest request, string promotions)
+         public IActionResult PromoteStudents(PromotionStudentRequest request, string promotions)
         {
             if (promotions.Equals("promotions"))
             {
@@ -204,7 +198,7 @@ namespace cwiczenia3_apbd.Controllers
 
 
 
-
+                    con.Close();
                     dr.Close();
                 }
 
@@ -238,14 +232,14 @@ namespace cwiczenia3_apbd.Controllers
 
 
                     com.Connection = con;
-                    com.CommandText = "SELECT * FROM Enrollment WHERE Semester = " + request.Semester + 1 + " AND IdStudy = " + idStud + " ORDER BY IdEnrollment;";
+                    com.CommandText = "SELECT * FROM Enrollment WHERE Semester = " + (request.Semester + 1) + " AND IdStudy = " + idStud + " ORDER BY IdEnrollment;";
 
 
                     con.Open();
                     var dr = com.ExecuteReader();
 
                     var enrollment = new Enrollment();
-                   
+
                     if (dr.Read())
                     {
                         enrollment.IdEnrollment = (int)dr["IdEnrollment"];
@@ -253,6 +247,8 @@ namespace cwiczenia3_apbd.Controllers
                         enrollment.Study = request.Studies;
                         enrollment.StartDate = dr["StartDate"].ToString();
                     }
+                    else
+                        return NotFound("not found new enrollment!");
 
 
 
