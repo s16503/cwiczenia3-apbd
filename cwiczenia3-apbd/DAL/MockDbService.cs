@@ -13,9 +13,9 @@ namespace cwiczenia3_apbd.DAL
         {
             _students = new List<Student>
                         {
-                            new Student{IdStudent=1, FirstName="Jan", LastName  ="Kowalski" },
-                            new Student{IdStudent=2, FirstName="Błążej", LastName  ="Lol" },
-                            new Student{IdStudent=3, FirstName="Andrzej", LastName  ="Nowak" },
+                            new Student{IdEnrollment=1, FirstName="Jan", LastName  ="Kowalski" },
+                            new Student{IdEnrollment=2, FirstName="Błążej", LastName  ="Lol" },
+                            new Student{IdEnrollment=3, FirstName="Andrzej", LastName  ="Nowak" },
                         };
 
 

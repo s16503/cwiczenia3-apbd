@@ -45,6 +45,7 @@ namespace cwiczenia3_apbd.Controllers
                     st.IndexNumber = dr["IndexNumber"].ToString();
                     st.IdEnrollment = (int)dr["IdEnrollment"];
                     st.BirthDate = dr["BirthDate"].ToString();
+                  ///  st.IdStudy = (int)dr["IdStudy"];
 
                     resList.Add(st);
                 }
@@ -127,14 +128,14 @@ namespace cwiczenia3_apbd.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateStudnet(int id)  //aktualizacja
+        public IActionResult UpdateStudnet(string id)  //aktualizacja
         {
             var list = _dbService.GetStudents();
 
 
             foreach (Student st in list)
             {
-                if (st.IdStudent == id)
+                if (st.IndexNumber == id)
                 {
                     st.IndexNumber = "s6666";
                     return Ok("Aktualizacja dokończona");
@@ -146,11 +147,11 @@ namespace cwiczenia3_apbd.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteStudent(int id)      //usuwanie
+        public IActionResult DeleteStudent(string id)      //usuwanie
         { 
             foreach (Student st in _dbService.GetStudents())
             {
-                if (st.IdStudent == id)
+                if (st.IndexNumber == id)
                 {
                     ((List<Student>)_dbService.GetStudents()).Remove(st);
                     return Ok("Usuwanie ukończone");

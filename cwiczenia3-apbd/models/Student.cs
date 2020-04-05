@@ -8,14 +8,14 @@ namespace cwiczenia3_apbd.models
     public class Student
     {
         
-        public int IdEnrollment { get; set; }  //na potrzeby poprzednich cwiczen
+        public int IdEnrollment { get; set; }  
 
 
         public string IndexNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string BirthDate { get; set; }
-       // public string Studies { get; set; }
+       // public int IdStudy { get; set; }
 
     }
 }

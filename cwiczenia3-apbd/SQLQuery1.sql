@@ -97,3 +97,50 @@ DELETE Studies WHERE Studies.name = 'Informatyka';
                     SELECT * FROM student;      
                     
                      SELECT * FROM studies;   
+
+    DELETE FROM Student;
+
+    Select * from student;
+
+
+    INSERT INTO Student(IndexNumber, FirstName, LastName,BirthDate, IdEnrollment) 
+  VALUES('s121212', 'Anna', 'Gold', CONVERT(DATETIME,'20.12.2020',104), 2 );
+
+  SELECT Studies.IdStudy FROm Studies WHERE Studies.Name = ' ';
+
+
+create procedure Promotions @Studies varchar(100),@Semester int
+as
+declare @idEnrollment Int,@idStudies int,@id int,@oldIdEnrollment int,@Info varchar(200),@newSemester int;
+begin
+set @newSemester=@Semester+1;
+Select @idStudies = Studies.IdStudy from Studies where Name=@Studies;
+Select @oldIdEnrollment = IdEnrollment from Enrollment where Semester=@Semester and IdStudy=@idStudies
+Select @idEnrollment = Enrollment.IdEnrollment from Enrollment where Semester=@newSemester and IdStudy=@idStudies;
+if @oldIdEnrollment is not null
+begin
+if @idEnrollment is null
+begin
+Select @id= Max(ISnull(IdEnrollment,0))+ 1 from Enrollment;
+insert into Enrollment(IdEnrollment,Semester,IdStudy,StartDate)
+values(@id,@newSemester,@idStudies,GETDATE());
+set @Info='dodoano Enrolment';
+Print @Info;
+Update Student set IdEnrollment = @id where IdEnrollment=@oldIdEnrollment;
+set @Info='zmieniono';
+print @Info;
+end;
+else
+--set @id=@idEnrollment;
+Update Student set IdEnrollment = @idEnrollment where IdEnrollment=@oldIdEnrollment;
+set @Info='zmieniono';
+print @Info;
+end;
+else
+set @Info='Nie istnieje';
+print @Info;
+commit;
+end;
+
+
+DELETE student WHERE IdEnrollment = 547;
