@@ -216,6 +216,7 @@ namespace cwiczenia3_apbd.Controllers
                         com.Parameters.Add("@Semester", SqlDbType.Int).Value = request.Semester;
                         com.ExecuteNonQuery();
 
+                        // NIECH PROCEDURA ZWRACA ENROLLMENT (selectem ) << reultSet
                         con.Close();
                     }
                     catch (SqlException ex)

@@ -146,3 +146,5 @@ end;
 DELETE student WHERE IdEnrollment = 547;
 
 SELECT * FROM Enrollment WHERE Semester = 5 AND IdStudy = 1 ORDER BY IdEnrollment;
+
+SELECT count(*) as count FROM Student WHERE IndexNumber ='s1234';
